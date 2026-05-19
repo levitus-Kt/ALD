@@ -33,4 +33,4 @@ def longest_increasing_streak(nums: list[int]) -> dict:
 
 
 nums = [1, 3, 3, 5, 5, 4, 7]
-print(longest_increasing_streak(nums))
+longest_increasing_streak(nums)
