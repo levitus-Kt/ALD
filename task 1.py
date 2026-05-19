@@ -37,6 +37,11 @@ def process_grades(records: list[str]) -> dict:
     }
 
 
+def emergency_exit(message):
+    print(message)
+    exit()
+
+
 if __name__ == "__main__":
     records = []
 
@@ -44,8 +49,7 @@ if __name__ == "__main__":
         # Получаем путь к файлу
         file_path = input("Введите полный путь к файлу с данными: ")
     except Exception as ex:
-        print(f"Неизвестная ошибка: {ex}, попробуйте еще раз")
-        exit()
+        emergency_exit(f"Неизвестная ошибка: {ex}, попробуйте еще раз")
     else:
         try:
             with open(file_path, "r", encoding="utf-8") as file:
@@ -53,17 +57,13 @@ if __name__ == "__main__":
                 records = file.readlines()
                 print(records)
         except FileNotFoundError as ex:
-            print(f"Файл не найден: {ex}")
-            exit()
+            emergency_exit(f"Файл не найден: {ex}")
         except Exception as ex:
-            print(f"Неизвестная ошибка: {ex}")
-            exit()
+            emergency_exit(f"Неизвестная ошибка: {ex}")
 
     if len(records) == 0:
-        print("В файле нет данных")
-        exit()
+        emergency_exit("В файле нет данных")
     if type(records) is not list:
-        print("Неверный формат данных")
-        exit()
+        emergency_exit("Неверный формат данных")
 
     process_grades(records)
