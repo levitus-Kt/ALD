@@ -1,3 +1,6 @@
+import re
+
+
 def process_grades(records: list[str]) -> dict:
     valid_count = 0
     total_sum = 0
@@ -11,12 +14,15 @@ def process_grades(records: list[str]) -> dict:
             skipped += 1
             continue
 
-        if len(parts[0]) < 1 or len(parts[1]) < 1:
+        if len(parts[0]) < 2 or len(parts[1]) < 1:
             skipped += 1
             continue
 
         surname, grade_str = parts
         grade_str = grade_str.strip()
+        if re.match(r"\d+", surname):
+            skipped += 1
+            continue
 
         # Проверка, что оценка - число
         try:
@@ -45,7 +51,7 @@ def process_grades(records: list[str]) -> dict:
     }
 
 
-def read_data():
+def read_data() -> list[str]:
     try:
         # Получаем путь к файлу
         file_path = input("Введите путь к файлу с данными: ")
