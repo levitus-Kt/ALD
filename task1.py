@@ -82,4 +82,4 @@ if __name__ == "__main__":
     if type(grades) is not list:
         emergency_exit("Неверный формат данных")
 
-    print(process_grades(grades))
+    process_grades(grades)
