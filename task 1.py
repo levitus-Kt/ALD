@@ -16,7 +16,7 @@ def process_grades(records: list[str]) -> dict:
         try:
             grade = int(grade_str)
             if not (0 <= grade <= 100):
-                raise ValueError("Invalid grade")
+                raise ValueError("Неправильная оценка")
 
             valid_count += 1
             total_sum += grade
@@ -38,14 +38,32 @@ def process_grades(records: list[str]) -> dict:
 
 
 if __name__ == "__main__":
-    choose = input("""
-        Выберите вариант ввода (цифрой):
-            1. Ввести с клавиатуры
-            2. Открыть файл и считать данные
+    records = []
 
-""")
-    if "1" in choose:
-        process_grades()
-    elif "2" in choose:
-        open_file_and
-    process_grades()
+    try:
+        # Получаем путь к файлу
+        file_path = input("Введите полный путь к файлу с данными: ")
+    except Exception as ex:
+        print(f"Неизвестная ошибка: {ex}, попробуйте еще раз")
+        exit()
+    else:
+        try:
+            with open(file_path, "r", encoding="utf-8") as file:
+                # Читаем данные
+                records = file.readlines()
+                print(records)
+        except FileNotFoundError as ex:
+            print(f"Файл не найден: {ex}")
+            exit()
+        except Exception as ex:
+            print(f"Неизвестная ошибка: {ex}")
+            exit()
+
+    if len(records) == 0:
+        print("В файле нет данных")
+        exit()
+    if type(records) is not list:
+        print("Неверный формат данных")
+        exit()
+
+    process_grades(records)
