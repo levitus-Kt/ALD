@@ -1,4 +1,4 @@
-def longest_increasing_streak(nums: list[int] = []) -> dict:
+def longest_increasing_streak(nums: list[int]) -> dict:
     if not nums:
         return {"length": 0, "streak": []}
 
